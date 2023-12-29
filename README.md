@@ -2,7 +2,7 @@
 
 Reproducer for a bug running yew with webkit.
 
-Inspirted by: https://github.com/jrouaix/wasm_pbm
+Inspired by: https://github.com/jrouaix/wasm_pbm
 
 We test on Debian bookworm using the epiphany-browser.
 
@@ -16,7 +16,7 @@ It sometimes required up to 50 reloads to trigger the bug.
 
 Note: Everything runs well inside Firefox or Chrome.
 
-## Obseverd bug (see bugs.txt for details) using Webkit
+## Observed bugs (see bugs.txt for details) using Webkit
 
 ```
 RuntimeError: call_indirect to a null table entry (near '...e__h9a7711c915d393d5(arg0, arg1, addHeap...')
