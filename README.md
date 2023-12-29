@@ -17,6 +17,7 @@ It sometimes required up to 50 reloads to trigger the bug.
 
 ## Obseverd bug (see bugs.txt for details)
 
+```
 RuntimeError: call_indirect to a null table entry (near '...e__h9a7711c915d393d5(arg0, arg1, addHeap...')
 RuntimeError: Out of bounds memory access (near '...e__h9a7711c915d393d5(arg0, arg1, addHeap...')
 RuntimeError: Unreachable code should not be executed (near '...e__h9a7711c915d393d5(arg0, arg1, addHeap...')
@@ -28,3 +29,4 @@ panicked at 'called `Result::unwrap()` on an `Err` value: LayoutError', /usr/src
 panicked at 'assertion failed: self.bucket_mask < Group::WIDTH', /home/dietmar/.cargo/registry/src/github.com-1ecc6299db9ec823/hashbrown-0.14.3/src/raw/mod.rs:1872:13
 [Error] panicked at 'Went past end of probe sequence', /home/dietmar/.cargo/registry/src/github.com-1ecc6299db9ec823/hashbrown-0.14.3/src/raw/mod.rs:177:9
 panicked at 'Hash table capacity overflow', /home/dietmar/.cargo/registry/src/github.com-1ecc6299db9ec823/hashbrown-0.14.3/src/raw/mod.rs:86:40
+```
