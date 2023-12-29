@@ -10,12 +10,13 @@ We test on Debian bookworm using the epiphany-browser.
 
     trunk serve
 
-Then open http://locahost:8080 on you webkit based browser and press reload until you get a crash.
+Then open http://locahost:8080 on your webkit based browser and press reload until you get a crash.
 
 It sometimes required up to 50 reloads to trigger the bug.
 
+Note: Everything runs well inside Firefox or Chrome.
 
-## Obseverd bug (see bugs.txt for details)
+## Obseverd bug (see bugs.txt for details) using Webkit
 
 ```
 RuntimeError: call_indirect to a null table entry (near '...e__h9a7711c915d393d5(arg0, arg1, addHeap...')
