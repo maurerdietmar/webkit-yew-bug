@@ -1,0 +1,284 @@
+We get different error (separated by "--------"):
+
+--------
+RuntimeError: call_indirect to a null table entry (near '...e__h9a7711c915d393d5(arg0, arg1, addHeap...')
+
+--------
+RuntimeError: Out of bounds memory access (near '...e__h9a7711c915d393d5(arg0, arg1, addHeap...')
+
+--------
+RuntimeError: Unreachable code should not be executed (near '...e__h9a7711c915d393d5(arg0, arg1, addHeap...')
+
+--------
+Unhandled Promise Rejection: RuntimeError: Unreachable code should not be executed (evaluating 'wasm.__wbindgen_start()')
+
+-------- (This one make absolutely no sense)
+panicked at 'assertion failed: `(left != right)`
+  left: `0`,
+ right: `0`', /home/dietmar/.cargo/registry/src/github.com-1ecc6299db9ec823/hashbrown-0.14.3/src/raw/mod.rs:2502:9
+
+Stack:
+
+@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:363:30
+<?>.wasm-function[console_error_panic_hook::Error::new::hd269f59fea51e7d0]@[wasm code]
+<?>.wasm-function[console_error_panic_hook::hook_impl::h8fe6cbd0e14a2988]@[wasm code]
+<?>.wasm-function[console_error_panic_hook::hook::hb437b654f2cbbffb]@[wasm code]
+<?>.wasm-function[core::ops::function::Fn::call::hcccce86084bcfc0a]@[wasm code]
+<?>.wasm-function[std::panicking::rust_panic_with_hook::hf80024f269e2af44]@[wasm code]
+<?>.wasm-function[std::panicking::begin_panic_handler::{{closure}}::h4f7ec628c37e1d94]@[wasm code]
+<?>.wasm-function[std::sys_common::backtrace::__rust_end_short_backtrace::hb367ee3be27c5afc]@[wasm code]
+<?>.wasm-function[rust_begin_unwind]@[wasm code]
+<?>.wasm-function[core::panicking::panic_fmt::h92300abd4d44cfd4]@[wasm code]
+<?>.wasm-function[core::panicking::assert_failed_inner::h9b8e04d8c3f20fac]@[wasm code]
+<?>.wasm-function[core::panicking::assert_failed::h896aab88c679c278]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTableInner::bucket::h1fd54d8e742615a6]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTable<T,A>::reserve_rehash::{{closure}}::h83f9953ae037839a]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTable<T,A>::reserve_rehash::hc071fef2e185ca8c]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTable<T,A>::reserve::hfc75368489a5a874]@[wasm code]
+<?>.wasm-function[indexmap::map::core::IndexMapCore<K,V>::reserve::hfab55e1b262196c7]@[wasm code]
+<?>.wasm-function[indexmap::map::IndexMap<K,V,S>::reserve::haf1449060dbc1d0d]@[wasm code]
+<?>.wasm-function[<indexmap::map::IndexMap<K,V,S> as core::iter::traits::collect::Extend<(K,V)>>::extend::h2bea84dd9a0c9595]@[wasm code]
+<?>.wasm-function[<indexmap::set::IndexSet<T,S> as core::iter::traits::collect::Extend<T>>::extend::h19ed99e00b7943e1]@[wasm code]
+<?>.wasm-function[yew::html::classes::Classes::push::h97b682f427e0f796]@[wasm code]
+<?>.wasm-function[<webkit_wasm_bug_reproducer::App as yew::html::component::Component>::view::h0d2d71f58ca24d43]@[wasm code]
+<?>.wasm-function[<T as yew::html::component::BaseComponent>::view::hed626e68e8fd7843]@[wasm code]
+<?>.wasm-function[<yew::html::component::lifecycle::CompStateInner<COMP> as yew::html::component::lifecycle::Stateful>::view::h889bbc169cebb9c9]@[wasm code]
+<?>.wasm-function[yew::html::component::lifecycle::ComponentState::render::he9d8299bfc1b5664]@[wasm code]
+<?>.wasm-function[<yew::html::component::lifecycle::RenderRunner as yew::scheduler::Runnable>::run::h7df6a601146c3065]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::scheduler_loop::h3e58ad1c17d6f907]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::{{closure}}::h184c698e000656f2]@[wasm code]
+<?>.wasm-function[std::thread::local::LocalKey<T>::try_with::h4dbb0d7afc9c908c]@[wasm code]
+<?>.wasm-function[std::thread::local::LocalKey<T>::with::hb6e13a7cd1f4a49e]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::he56c9722bbfb2c52]@[wasm code]
+<?>.wasm-function[yew::scheduler::arch::start::{{closure}}::hf4f0b069672a717e]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::task::singlethread::Task::run::h4cf18c16653b2159]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::queue::QueueState::run_all::h17f04589e2c000ac]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::queue::Queue::new::{{closure}}::h507bc85b4951a22f]@[wasm code]
+<?>.wasm-function[<dyn core::ops::function::FnMut<(A,)>+Output = R as wasm_bindgen::closure::WasmClosure>::describe::invoke::h9a7711c915d393d5]@[wasm code]
+__wbg_adapter_21@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:241:134
+real@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:226:21
+
+-------- makes no sense, like: https://github.com/rust-lang/hashbrown/issues/194
+panicked at 'assertion failed: buckets.is_power_of_two()', /home/dietmar/.cargo/registry/src/github.com-1ecc6299db9ec823/hashbrown-0.14.3/src/raw/mod.rs:1744:9
+
+Stack:
+
+@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:363:30
+<?>.wasm-function[console_error_panic_hook::Error::new::hd269f59fea51e7d0]@[wasm code]
+<?>.wasm-function[console_error_panic_hook::hook_impl::h8fe6cbd0e14a2988]@[wasm code]
+<?>.wasm-function[console_error_panic_hook::hook::hb437b654f2cbbffb]@[wasm code]
+<?>.wasm-function[core::ops::function::Fn::call::hcccce86084bcfc0a]@[wasm code]
+<?>.wasm-function[std::panicking::rust_panic_with_hook::hf80024f269e2af44]@[wasm code]
+<?>.wasm-function[std::panicking::begin_panic_handler::{{closure}}::h4f7ec628c37e1d94]@[wasm code]
+<?>.wasm-function[std::sys_common::backtrace::__rust_end_short_backtrace::hb367ee3be27c5afc]@[wasm code]
+<?>.wasm-function[rust_begin_unwind]@[wasm code]
+<?>.wasm-function[core::panicking::panic_fmt::h92300abd4d44cfd4]@[wasm code]
+<?>.wasm-function[core::panicking::panic::ha477cdc2028ca479]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTableInner::new_uninitialized::h32efd265142b6265]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTableInner::fallible_with_capacity::hcd5d585011f49850]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTableInner::with_capacity::ha490c4a608475621]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTable<T,A>::with_capacity_in::h7bc90a098011fd41]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTable<T>::with_capacity::hd23fa35ed5ef0427]@[wasm code]
+<?>.wasm-function[indexmap::map::core::IndexMapCore<K,V>::with_capacity::ha0d85293f1e93d48]@[wasm code]
+<?>.wasm-function[indexmap::map::IndexMap<K,V,S>::with_capacity_and_hasher::h1bf8452902d4abaf]@[wasm code]
+<?>.wasm-function[<indexmap::map::IndexMap<K,V,S> as core::iter::traits::collect::FromIterator<(K,V)>>::from_iter::h7aa3337211729fb9]@[wasm code]
+<?>.wasm-function[<indexmap::set::IndexSet<T,S> as core::iter::traits::collect::FromIterator<T>>::from_iter::hc355027fc35689c6]@[wasm code]
+<?>.wasm-function[<yew::html::classes::Classes as core::convert::From<alloc::string::String>>::from::h1381c581b6b1467d]@[wasm code]
+<?>.wasm-function[<T as core::convert::Into<U>>::into::hf51aa94ff84b7fcc]@[wasm code]
+<?>.wasm-function[yew::html::classes::Classes::push::h97b682f427e0f796]@[wasm code]
+<?>.wasm-function[<webkit_wasm_bug_reproducer::App as yew::html::component::Component>::view::h0d2d71f58ca24d43]@[wasm code]
+<?>.wasm-function[<T as yew::html::component::BaseComponent>::view::hed626e68e8fd7843]@[wasm code]
+<?>.wasm-function[<yew::html::component::lifecycle::CompStateInner<COMP> as yew::html::component::lifecycle::Stateful>::view::h889bbc169cebb9c9]@[wasm code]
+<?>.wasm-function[yew::html::component::lifecycle::ComponentState::render::he9d8299bfc1b5664]@[wasm code]
+<?>.wasm-function[<yew::html::component::lifecycle::RenderRunner as yew::scheduler::Runnable>::run::h7df6a601146c3065]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::scheduler_loop::h3e58ad1c17d6f907]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::{{closure}}::h184c698e000656f2]@[wasm code]
+<?>.wasm-function[std::thread::local::LocalKey<T>::try_with::h4dbb0d7afc9c908c]@[wasm code]
+<?>.wasm-function[std::thread::local::LocalKey<T>::with::hb6e13a7cd1f4a49e]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::he56c9722bbfb2c52]@[wasm code]
+<?>.wasm-function[yew::scheduler::arch::start::{{closure}}::hf4f0b069672a717e]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::task::singlethread::Task::run::h4cf18c16653b2159]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::queue::QueueState::run_all::h17f04589e2c000ac]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::queue::Queue::new::{{closure}}::h507bc85b4951a22f]@[wasm code]
+<?>.wasm-function[<dyn core::ops::function::FnMut<(A,)>+Output = R as wasm_bindgen::closure::WasmClosure>::describe::invoke::h9a7711c915d393d5]@[wasm code]
+__wbg_adapter_21@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:241:134
+real@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:226:21
+
+
+
+
+--------
+panicked at 'attempt to subtract with overflow', /home/dietmar/.cargo/registry/src/github.com-1ecc6299db9ec823/hashbrown-0.14.3/src/raw/mod.rs:4268:9
+
+Stack:
+
+@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:363:30
+<?>.wasm-function[console_error_panic_hook::Error::new::hd269f59fea51e7d0]@[wasm code]
+<?>.wasm-function[console_error_panic_hook::hook_impl::h8fe6cbd0e14a2988]@[wasm code]
+<?>.wasm-function[console_error_panic_hook::hook::hb437b654f2cbbffb]@[wasm code]
+<?>.wasm-function[core::ops::function::Fn::call::hcccce86084bcfc0a]@[wasm code]
+<?>.wasm-function[std::panicking::rust_panic_with_hook::hf80024f269e2af44]@[wasm code]
+<?>.wasm-function[std::panicking::begin_panic_handler::{{closure}}::h4f7ec628c37e1d94]@[wasm code]
+<?>.wasm-function[std::sys_common::backtrace::__rust_end_short_backtrace::hb367ee3be27c5afc]@[wasm code]
+<?>.wasm-function[rust_begin_unwind]@[wasm code]
+<?>.wasm-function[core::panicking::panic_fmt::h92300abd4d44cfd4]@[wasm code]
+<?>.wasm-function[core::panicking::panic::ha477cdc2028ca479]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTable<T,A>::reserve_rehash::hc071fef2e185ca8c]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTable<T,A>::reserve::hfc75368489a5a874]@[wasm code]
+<?>.wasm-function[indexmap::map::core::IndexMapCore<K,V>::reserve::hfab55e1b262196c7]@[wasm code]
+<?>.wasm-function[indexmap::map::IndexMap<K,V,S>::reserve::haf1449060dbc1d0d]@[wasm code]
+<?>.wasm-function[<indexmap::map::IndexMap<K,V,S> as core::iter::traits::collect::Extend<(K,V)>>::extend::h2bea84dd9a0c9595]@[wasm code]
+<?>.wasm-function[<indexmap::set::IndexSet<T,S> as core::iter::traits::collect::Extend<T>>::extend::h19ed99e00b7943e1]@[wasm code]
+<?>.wasm-function[yew::html::classes::Classes::push::h97b682f427e0f796]@[wasm code]
+<?>.wasm-function[<webkit_wasm_bug_reproducer::App as yew::html::component::Component>::view::h0d2d71f58ca24d43]@[wasm code]
+<?>.wasm-function[<T as yew::html::component::BaseComponent>::view::hed626e68e8fd7843]@[wasm code]
+<?>.wasm-function[<yew::html::component::lifecycle::CompStateInner<COMP> as yew::html::component::lifecycle::Stateful>::view::h889bbc169cebb9c9]@[wasm code]
+<?>.wasm-function[yew::html::component::lifecycle::ComponentState::render::he9d8299bfc1b5664]@[wasm code]
+<?>.wasm-function[<yew::html::component::lifecycle::RenderRunner as yew::scheduler::Runnable>::run::h7df6a601146c3065]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::scheduler_loop::h3e58ad1c17d6f907]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::{{closure}}::h184c698e000656f2]@[wasm code]
+<?>.wasm-function[std::thread::local::LocalKey<T>::try_with::h4dbb0d7afc9c908c]@[wasm code]
+<?>.wasm-function[std::thread::local::LocalKey<T>::with::hb6e13a7cd1f4a49e]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::he56c9722bbfb2c52]@[wasm code]
+<?>.wasm-function[yew::scheduler::arch::start::{{closure}}::hf4f0b069672a717e]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::task::singlethread::Task::run::h4cf18c16653b2159]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::queue::QueueState::run_all::h17f04589e2c000ac]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::queue::Queue::new::{{closure}}::h507bc85b4951a22f]@[wasm code]
+<?>.wasm-function[<dyn core::ops::function::FnMut<(A,)>+Output = R as wasm_bindgen::closure::WasmClosure>::describe::invoke::h9a7711c915d393d5]@[wasm code]
+__wbg_adapter_21@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:241:134
+real@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:226:21
+
+
+
+--------
+panicked at 'called `Result::unwrap()` on an `Err` value: LayoutError', /usr/src/rustc-1.70.0/library/alloc/src/rc.rs:1474:41
+
+Stack:
+
+@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:363:30
+<?>.wasm-function[console_error_panic_hook::Error::new::hd269f59fea51e7d0]@[wasm code]
+<?>.wasm-function[console_error_panic_hook::hook_impl::h8fe6cbd0e14a2988]@[wasm code]
+<?>.wasm-function[console_error_panic_hook::hook::hb437b654f2cbbffb]@[wasm code]
+<?>.wasm-function[core::ops::function::Fn::call::hcccce86084bcfc0a]@[wasm code]
+<?>.wasm-function[std::panicking::rust_panic_with_hook::hf80024f269e2af44]@[wasm code]
+<?>.wasm-function[std::panicking::begin_panic_handler::{{closure}}::h4f7ec628c37e1d94]@[wasm code]
+<?>.wasm-function[std::sys_common::backtrace::__rust_end_short_backtrace::hb367ee3be27c5afc]@[wasm code]
+<?>.wasm-function[rust_begin_unwind]@[wasm code]
+<?>.wasm-function[core::panicking::panic_fmt::h92300abd4d44cfd4]@[wasm code]
+<?>.wasm-function[core::result::unwrap_failed::h4f98a1c8afdb5f57]@[wasm code]
+<?>.wasm-function[alloc::rc::Rc<[T]>::allocate_for_slice::h80b827d6d7b37e73]@[wasm code]
+<?>.wasm-function[alloc::rc::Rc<[T]>::copy_from_slice::hb6a32b04d048752c]@[wasm code]
+<?>.wasm-function[<alloc::rc::Rc<str> as core::convert::From<&str>>::from::h9f697532a147cafe]@[wasm code]
+<?>.wasm-function[<alloc::rc::Rc<str> as core::convert::From<alloc::string::String>>::from::hef234cbbc9cb9429]@[wasm code]
+<?>.wasm-function[<implicit_clone::unsync::string::IString as core::convert::From<alloc::string::String>>::from::h1618d365ba5b15cf]@[wasm code]
+<?>.wasm-function[<yew::html::classes::Classes as core::convert::From<alloc::string::String>>::from::h1381c581b6b1467d]@[wasm code]
+<?>.wasm-function[<T as core::convert::Into<U>>::into::hf51aa94ff84b7fcc]@[wasm code]
+<?>.wasm-function[yew::html::classes::Classes::push::h97b682f427e0f796]@[wasm code]
+<?>.wasm-function[<webkit_wasm_bug_reproducer::App as yew::html::component::Component>::view::h0d2d71f58ca24d43]@[wasm code]
+<?>.wasm-function[<T as yew::html::component::BaseComponent>::view::hed626e68e8fd7843]@[wasm code]
+<?>.wasm-function[<yew::html::component::lifecycle::CompStateInner<COMP> as yew::html::component::lifecycle::Stateful>::view::h889bbc169cebb9c9]@[wasm code]
+<?>.wasm-function[yew::html::component::lifecycle::ComponentState::render::he9d8299bfc1b5664]@[wasm code]
+<?>.wasm-function[<yew::html::component::lifecycle::RenderRunner as yew::scheduler::Runnable>::run::h7df6a601146c3065]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::scheduler_loop::h3e58ad1c17d6f907]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::{{closure}}::h184c698e000656f2]@[wasm code]
+<?>.wasm-function[std::thread::local::LocalKey<T>::try_with::h4dbb0d7afc9c908c]@[wasm code]
+<?>.wasm-function[std::thread::local::LocalKey<T>::with::hb6e13a7cd1f4a49e]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::he56c9722bbfb2c52]@[wasm code]
+<?>.wasm-function[yew::scheduler::arch::start::{{closure}}::hf4f0b069672a717e]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::task::singlethread::Task::run::h4cf18c16653b2159]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::queue::QueueState::run_all::h17f04589e2c000ac]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::queue::Queue::new::{{closure}}::h507bc85b4951a22f]@[wasm code]
+<?>.wasm-function[<dyn core::ops::function::FnMut<(A,)>+Output = R as wasm_bindgen::closure::WasmClosure>::describe::invoke::h9a7711c915d393d5]@[wasm code]
+__wbg_adapter_21@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:241:134
+real@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:226:21
+
+
+
+--------
+panicked at 'assertion failed: self.bucket_mask < Group::WIDTH', /home/dietmar/.cargo/registry/src/github.com-1ecc6299db9ec823/hashbrown-0.14.3/src/raw/mod.rs:1872:13
+
+Stack:
+
+@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:363:30
+<?>.wasm-function[console_error_panic_hook::Error::new::hd269f59fea51e7d0]@[wasm code]
+<?>.wasm-function[console_error_panic_hook::hook_impl::h8fe6cbd0e14a2988]@[wasm code]
+<?>.wasm-function[console_error_panic_hook::hook::hb437b654f2cbbffb]@[wasm code]
+<?>.wasm-function[core::ops::function::Fn::call::hcccce86084bcfc0a]@[wasm code]
+<?>.wasm-function[std::panicking::rust_panic_with_hook::hf80024f269e2af44]@[wasm code]
+<?>.wasm-function[std::panicking::begin_panic_handler::{{closure}}::h4f7ec628c37e1d94]@[wasm code]
+<?>.wasm-function[std::sys_common::backtrace::__rust_end_short_backtrace::hb367ee3be27c5afc]@[wasm code]
+<?>.wasm-function[rust_begin_unwind]@[wasm code]
+<?>.wasm-function[core::panicking::panic_fmt::h92300abd4d44cfd4]@[wasm code]
+<?>.wasm-function[core::panicking::panic::ha477cdc2028ca479]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTableInner::fix_insert_slot::hf991483b4b0de03d]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTableInner::find_insert_slot::h1f432d9480d20c56]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTableInner::prepare_insert_slot::h669ec30b49b6f157]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTable<T,A>::reserve_rehash::hc071fef2e185ca8c]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTable<T,A>::reserve::hfc75368489a5a874]@[wasm code]
+<?>.wasm-function[indexmap::map::core::IndexMapCore<K,V>::reserve::hfab55e1b262196c7]@[wasm code]
+<?>.wasm-function[indexmap::map::IndexMap<K,V,S>::reserve::haf1449060dbc1d0d]@[wasm code]
+<?>.wasm-function[<indexmap::map::IndexMap<K,V,S> as core::iter::traits::collect::Extend<(K,V)>>::extend::h2bea84dd9a0c9595]@[wasm code]
+<?>.wasm-function[<indexmap::set::IndexSet<T,S> as core::iter::traits::collect::Extend<T>>::extend::h19ed99e00b7943e1]@[wasm code]
+<?>.wasm-function[yew::html::classes::Classes::push::h97b682f427e0f796]@[wasm code]
+<?>.wasm-function[<webkit_wasm_bug_reproducer::App as yew::html::component::Component>::view::h0d2d71f58ca24d43]@[wasm code]
+<?>.wasm-function[<T as yew::html::component::BaseComponent>::view::hed626e68e8fd7843]@[wasm code]
+<?>.wasm-function[<yew::html::component::lifecycle::CompStateInner<COMP> as yew::html::component::lifecycle::Stateful>::view::h889bbc169cebb9c9]@[wasm code]
+<?>.wasm-function[yew::html::component::lifecycle::ComponentState::render::he9d8299bfc1b5664]@[wasm code]
+<?>.wasm-function[<yew::html::component::lifecycle::RenderRunner as yew::scheduler::Runnable>::run::h7df6a601146c3065]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::scheduler_loop::h3e58ad1c17d6f907]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::{{closure}}::h184c698e000656f2]@[wasm code]
+<?>.wasm-function[std::thread::local::LocalKey<T>::try_with::h4dbb0d7afc9c908c]@[wasm code]
+<?>.wasm-function[std::thread::local::LocalKey<T>::with::hb6e13a7cd1f4a49e]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::he56c9722bbfb2c52]@[wasm code]
+<?>.wasm-function[yew::scheduler::arch::start::{{closure}}::hf4f0b069672a717e]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::task::singlethread::Task::run::h4cf18c16653b2159]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::queue::QueueState::run_all::h17f04589e2c000ac]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::queue::Queue::new::{{closure}}::h507bc85b4951a22f]@[wasm code]
+<?>.wasm-function[<dyn core::ops::function::FnMut<(A,)>+Output = R as wasm_bindgen::closure::WasmClosure>::describe::invoke::h9a7711c915d393d5]@[wasm code]
+__wbg_adapter_21@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:241:134
+real@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:226:21
+
+
+
+--------
+[Error] panicked at 'Went past end of probe sequence', /home/dietmar/.cargo/registry/src/github.com-1ecc6299db9ec823/hashbrown-0.14.3/src/raw/mod.rs:177:9
+
+Stack:
+
+@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:363:30
+<?>.wasm-function[console_error_panic_hook::Error::new::hd269f59fea51e7d0]@[wasm code]
+<?>.wasm-function[console_error_panic_hook::hook_impl::h8fe6cbd0e14a2988]@[wasm code]
+<?>.wasm-function[console_error_panic_hook::hook::hb437b654f2cbbffb]@[wasm code]
+<?>.wasm-function[core::ops::function::Fn::call::hcccce86084bcfc0a]@[wasm code]
+<?>.wasm-function[std::panicking::rust_panic_with_hook::hf80024f269e2af44]@[wasm code]
+<?>.wasm-function[std::panicking::begin_panic_handler::{{closure}}::h4f7ec628c37e1d94]@[wasm code]
+<?>.wasm-function[std::sys_common::backtrace::__rust_end_short_backtrace::hb367ee3be27c5afc]@[wasm code]
+<?>.wasm-function[rust_begin_unwind]@[wasm code]
+<?>.wasm-function[core::panicking::panic_fmt::h92300abd4d44cfd4]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::ProbeSeq::move_next::hacd55bd868833d42]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTableInner::find_insert_slot::h1f432d9480d20c56]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTableInner::prepare_insert_slot::h669ec30b49b6f157]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTable<T,A>::reserve_rehash::hc071fef2e185ca8c]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTable<T,A>::reserve::hfc75368489a5a874]@[wasm code]
+<?>.wasm-function[indexmap::map::core::IndexMapCore<K,V>::reserve::hfab55e1b262196c7]@[wasm code]
+<?>.wasm-function[indexmap::map::IndexMap<K,V,S>::reserve::haf1449060dbc1d0d]@[wasm code]
+<?>.wasm-function[<indexmap::map::IndexMap<K,V,S> as core::iter::traits::collect::Extend<(K,V)>>::extend::h2bea84dd9a0c9595]@[wasm code]
+<?>.wasm-function[<indexmap::set::IndexSet<T,S> as core::iter::traits::collect::Extend<T>>::extend::h19ed99e00b7943e1]@[wasm code]
+<?>.wasm-function[yew::html::classes::Classes::push::h97b682f427e0f796]@[wasm code]
+<?>.wasm-function[<webkit_wasm_bug_reproducer::App as yew::html::component::Component>::view::h0d2d71f58ca24d43]@[wasm code]
+<?>.wasm-function[<T as yew::html::component::BaseComponent>::view::hed626e68e8fd7843]@[wasm code]
+<?>.wasm-function[<yew::html::component::lifecycle::CompStateInner<COMP> as yew::html::component::lifecycle::Stateful>::view::h889bbc169cebb9c9]@[wasm code]
+<?>.wasm-function[yew::html::component::lifecycle::ComponentState::render::he9d8299bfc1b5664]@[wasm code]
+<?>.wasm-function[<yew::html::component::lifecycle::RenderRunner as yew::scheduler::Runnable>::run::h7df6a601146c3065]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::scheduler_loop::h3e58ad1c17d6f907]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::{{closure}}::h184c698e000656f2]@[wasm code]
+<?>.wasm-function[std::thread::local::LocalKey<T>::try_with::h4dbb0d7afc9c908c]@[wasm code]
+<?>.wasm-function[std::thread::local::LocalKey<T>::with::hb6e13a7cd1f4a49e]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::he56c9722bbfb2c52]@[wasm code]
+<?>.wasm-function[yew::scheduler::arch::start::{{closure}}::hf4f0b069672a717e]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::task::singlethread::Task::run::h4cf18c16653b2159]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::queue::QueueState::run_all::h17f04589e2c000ac]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::queue::Queue::new::{{closure}}::h507bc85b4951a22f]@[wasm code]
+<?>.wasm-function[<dyn core::ops::function::FnMut<(A,)>+Output = R as wasm_bindgen::closure::WasmClosure>::describe::invoke::h9a7711c915d393d5]@[wasm code]
+__wbg_adapter_21@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:241:134
+real@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:226:21
