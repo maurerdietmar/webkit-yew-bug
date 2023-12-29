@@ -31,3 +31,10 @@ panicked at 'assertion failed: self.bucket_mask < Group::WIDTH', /home/dietmar/.
 [Error] panicked at 'Went past end of probe sequence', /home/dietmar/.cargo/registry/src/github.com-1ecc6299db9ec823/hashbrown-0.14.3/src/raw/mod.rs:177:9
 panicked at 'Hash table capacity overflow', /home/dietmar/.cargo/registry/src/github.com-1ecc6299db9ec823/hashbrown-0.14.3/src/raw/mod.rs:86:40
 ```
+
+
+## Related links
+
+- https://github.com/tauri-apps/tauri/issues/7154
+- https://github.com/jrouaix/wasm_pbm/tree/main
+- https://bugs.webkit.org/show_bug.cgi?id=259441
