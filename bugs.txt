@@ -282,3 +282,50 @@ Stack:
 <?>.wasm-function[<dyn core::ops::function::FnMut<(A,)>+Output = R as wasm_bindgen::closure::WasmClosure>::describe::invoke::h9a7711c915d393d5]@[wasm code]
 __wbg_adapter_21@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:241:134
 real@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:226:21
+
+
+--------
+panicked at 'Hash table capacity overflow', /home/dietmar/.cargo/registry/src/github.com-1ecc6299db9ec823/hashbrown-0.14.3/src/raw/mod.rs:86:40
+
+Stack:
+
+@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:363:30
+<?>.wasm-function[console_error_panic_hook::Error::new::hd269f59fea51e7d0]@[wasm code]
+<?>.wasm-function[console_error_panic_hook::hook_impl::h8fe6cbd0e14a2988]@[wasm code]
+<?>.wasm-function[console_error_panic_hook::hook::hb437b654f2cbbffb]@[wasm code]
+<?>.wasm-function[core::ops::function::Fn::call::hcccce86084bcfc0a]@[wasm code]
+<?>.wasm-function[std::panicking::rust_panic_with_hook::hf80024f269e2af44]@[wasm code]
+<?>.wasm-function[std::panicking::begin_panic_handler::{{closure}}::h4f7ec628c37e1d94]@[wasm code]
+<?>.wasm-function[std::sys_common::backtrace::__rust_end_short_backtrace::hb367ee3be27c5afc]@[wasm code]
+<?>.wasm-function[rust_begin_unwind]@[wasm code]
+<?>.wasm-function[core::panicking::panic_fmt::h92300abd4d44cfd4]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::Fallibility::capacity_overflow::hf447074b364de873]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTableInner::new_uninitialized::h32efd265142b6265]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTableInner::fallible_with_capacity::hcd5d585011f49850]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTableInner::with_capacity::ha490c4a608475621]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTable<T,A>::with_capacity_in::h7bc90a098011fd41]@[wasm code]
+<?>.wasm-function[hashbrown::raw::inner::RawTable<T>::with_capacity::hd23fa35ed5ef0427]@[wasm code]
+<?>.wasm-function[indexmap::map::core::IndexMapCore<K,V>::with_capacity::ha0d85293f1e93d48]@[wasm code]
+<?>.wasm-function[indexmap::map::IndexMap<K,V,S>::with_capacity_and_hasher::h1bf8452902d4abaf]@[wasm code]
+<?>.wasm-function[<indexmap::map::IndexMap<K,V,S> as core::iter::traits::collect::FromIterator<(K,V)>>::from_iter::h7aa3337211729fb9]@[wasm code]
+<?>.wasm-function[<indexmap::set::IndexSet<T,S> as core::iter::traits::collect::FromIterator<T>>::from_iter::hc355027fc35689c6]@[wasm code]
+<?>.wasm-function[<yew::html::classes::Classes as core::convert::From<alloc::string::String>>::from::h1381c581b6b1467d]@[wasm code]
+<?>.wasm-function[<T as core::convert::Into<U>>::into::hf51aa94ff84b7fcc]@[wasm code]
+<?>.wasm-function[yew::html::classes::Classes::push::h97b682f427e0f796]@[wasm code]
+<?>.wasm-function[<webkit_wasm_bug_reproducer::App as yew::html::component::Component>::view::h0d2d71f58ca24d43]@[wasm code]
+<?>.wasm-function[<T as yew::html::component::BaseComponent>::view::hed626e68e8fd7843]@[wasm code]
+<?>.wasm-function[<yew::html::component::lifecycle::CompStateInner<COMP> as yew::html::component::lifecycle::Stateful>::view::h889bbc169cebb9c9]@[wasm code]
+<?>.wasm-function[yew::html::component::lifecycle::ComponentState::render::he9d8299bfc1b5664]@[wasm code]
+<?>.wasm-function[<yew::html::component::lifecycle::RenderRunner as yew::scheduler::Runnable>::run::h7df6a601146c3065]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::scheduler_loop::h3e58ad1c17d6f907]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::{{closure}}::h184c698e000656f2]@[wasm code]
+<?>.wasm-function[std::thread::local::LocalKey<T>::try_with::h4dbb0d7afc9c908c]@[wasm code]
+<?>.wasm-function[std::thread::local::LocalKey<T>::with::hb6e13a7cd1f4a49e]@[wasm code]
+<?>.wasm-function[yew::scheduler::start_now::he56c9722bbfb2c52]@[wasm code]
+<?>.wasm-function[yew::scheduler::arch::start::{{closure}}::hf4f0b069672a717e]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::task::singlethread::Task::run::h4cf18c16653b2159]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::queue::QueueState::run_all::h17f04589e2c000ac]@[wasm code]
+<?>.wasm-function[wasm_bindgen_futures::queue::Queue::new::{{closure}}::h507bc85b4951a22f]@[wasm code]
+<?>.wasm-function[<dyn core::ops::function::FnMut<(A,)>+Output = R as wasm_bindgen::closure::WasmClosure>::describe::invoke::h9a7711c915d393d5]@[wasm code]
+__wbg_adapter_21@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:241:134
+real@http://192.168.3.106:8080/webkit_wasm_bug_reproducer-33c7052ab5f860c5.js:226:21
