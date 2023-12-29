@@ -1,4 +1,3 @@
-use std::collections::HashMap;
 use yew::prelude::*;
 
 pub struct App {}
@@ -11,7 +10,7 @@ impl Component for App {
         Self {}
     }
 
-    fn view(&self, ctx: &Context<Self>) -> Html {
+    fn view(&self, _ctx: &Context<Self>) -> Html {
         log::info!("start view");
         let mut class = Classes::new();
         for i in 0..100 {
